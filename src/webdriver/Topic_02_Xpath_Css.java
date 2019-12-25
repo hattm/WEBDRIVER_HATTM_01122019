@@ -1,4 +1,4 @@
-package selenium_api;
+package webdriver;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 
-public class Topic_01_checkEnvironment {
+public class Topic_02_Xpath_Css {
 	WebDriver driver;
 	
   @Test
