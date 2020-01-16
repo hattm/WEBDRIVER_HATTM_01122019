@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -21,10 +23,36 @@ public class Topic_02_Xpath_Css {
 	  driver.manage().window().maximize();
 
   }
-
    
    @Test
-   public void TC_01_LoginWithUserPassEmpty() {
+   public void TC_01_CheckNavigatePage() {
+	   driver.get("http://live.demoguru99.com/");
+	   driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	   
+	   String homePageTitle = driver.getTitle();
+	   Assert.assertEquals(homePageTitle, "Home page");
+	   
+	   driver.findElement(By.xpath("//div[@class ='footer' ]//a[text()='My Account']")).click();
+	   driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
+	 
+	   driver.navigate().back();
+	   // Về lại page log in thành công
+	   Assert.assertTrue(driver.findElement(By.xpath("//form[@id='login-form']")).isDisplayed());
+	   
+	   String logUrl = driver.getCurrentUrl();
+	   Assert.assertEquals(logUrl, "http://live.demoguru99.com/index.php/customer/account/login/");
+	   
+	   // Về lại page register thành công
+	   driver.navigate().forward();
+	   Assert.assertTrue(driver.findElement(By.xpath("//form[@id='form-validate']")).isDisplayed());
+	   
+	   String registerUrl = driver.getCurrentUrl();
+	   Assert.assertEquals(registerUrl, "http://live.demoguru99.com/index.php/customer/account/create/");
+   }
+
+   
+   @Test (enabled = false)
+   public void TC_02_LoginWithUserPassEmpty() {
 	   driver .get("http://live.demoguru99.com/index.php");
 	   driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	   
@@ -41,8 +69,8 @@ public class Topic_02_Xpath_Css {
 	 
  
    }
-   @Test
-   public void TC_02_LoginWithEmailInvalid() {
+   @Test (enabled = false)
+   public void TC_03_LoginWithEmailInvalid() {
 	   driver .get("http://live.demoguru99.com/index.php");
 	   driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	   driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
@@ -55,8 +83,8 @@ public class Topic_02_Xpath_Css {
 	  
    }
    
-   @Test
-   public void TC_03_LoginWithPassworkLessthan6Characters() {
+   @Test (enabled = false)
+   public void TC_04_LoginWithPassworkLessthan6Characters() {
 	   driver .get("http://live.demoguru99.com/index.php");
 	   driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	   driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
@@ -68,8 +96,8 @@ public class Topic_02_Xpath_Css {
    }
 
    
-   @Test
-   public void TC_04_CreatAnAccount() {
+   @Test (enabled = false)
+   public void TC_05_CreatAnAccount() {
 	   driver .get("http://live.demoguru99.com/index.php");
 	   driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	   driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
